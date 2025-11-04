@@ -32,11 +32,17 @@ class AudioProcessor:
             st.error(f"Error saving audio file: {str(e)}")
             return False
     
-    def upload_to_assemblyai(self, file):
-        """Upload audio file to AssemblyAI"""
+    def upload_to_assemblyai(self):
+        """Upload audio file to AssemblyAI from saved temp file"""
         upload_url = 'https://api.assemblyai.com/v2/upload'
         try:
-            response = requests.post(upload_url, headers=self.headers, files={'file': file})
+            # Read from the saved temporary file
+            with open(self.audio_path, 'rb') as audio_file:
+                response = requests.post(
+                    upload_url, 
+                    headers=self.headers, 
+                    data=audio_file
+                )
             response.raise_for_status()
             return response.json()['upload_url']
         except Exception as e:
@@ -127,7 +133,7 @@ def main():
                 try:
                     # Process the audio file
                     with st.spinner("Uploading audio file..."):
-                        audio_url = processor.upload_to_assemblyai(uploaded_file)
+                        audio_url = processor.upload_to_assemblyai()  # Removed uploaded_file parameter
                     
                     if audio_url:
                         with st.spinner("Starting transcription..."):
