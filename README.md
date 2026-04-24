@@ -1,6 +1,12 @@
-(Won first place in our track in the hackathon)
-<br>
+**Won 1st place in track at Codezilla Hackathon**
+
 Deployed Link: <a href="https://speaker-separation.streamlit.app/" target="_blank"> Speech-Diarization </a>
+
+## Highlights
+
+- Automated speaker diarization on multi-speaker audio using AssemblyAI
+- Per-speaker word count and speaking-time statistics
+- Segmented audio playback for each speaker turn
 
 #### Problem Statement:
 1. Multi-speaker audio recordings are difficult to analyze.
